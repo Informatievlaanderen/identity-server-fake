@@ -1,0 +1,8 @@
+version: '3'
+services:
+   identity-server:
+     build: src/Be.Vlaanderen.Basisregisters.IdentityServer/
+     volumes:
+       - ./identityserver:/home/identityserver
+     ports:
+       - "5051:80"
