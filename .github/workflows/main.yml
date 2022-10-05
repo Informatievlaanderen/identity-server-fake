@@ -16,7 +16,6 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
-
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v2
       with:
@@ -25,7 +24,6 @@ jobs:
     - name: .NET version
       shell: bash
       run: dotnet --info
-
 
     - name: Log in to the Container registry
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -37,6 +35,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
-        context: ./src/Be.Vlaanderen.BasisregistersIdentityServer
+        context: ./src/Be.Vlaanderen.Basisregisters.IdentityServer
         push: true
         tags: informatievlaanderen/identity-server-fake:latest
