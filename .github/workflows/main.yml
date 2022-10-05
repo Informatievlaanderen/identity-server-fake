@@ -37,5 +37,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
+        context: ./src/Be.Vlaanderen.BasisregistersIdentityServer
         push: true
         tags: informatievlaanderen/identity-server-fake:latest
