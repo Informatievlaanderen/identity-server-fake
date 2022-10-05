@@ -9,8 +9,13 @@ internal static class HostingExtensions
     public static WebApplicationBuilder ConfigureIdentityServer(this WebApplicationBuilder builder)
     {
         var finalJsonConfig = new JsonConfig();
+        
+        // var identityServerConfig = builder.Configuration.GetSection("IdentityServer");
+        // var configFolder = identityServerConfig["ConfigFolder"];
+        // var di = new DirectoryInfo("/home/identityserver");
+        // //var di = new DirectoryInfo("/home/wodan/gitrepos/digitaalvlaanderen/identity-server-fake/config");
 
-        var di = new DirectoryInfo("/home/identityserver");
+        var di = GetConfigFolder(builder);
         foreach (var fi in di.GetFiles("*.json"))
         {
             using var fs = fi.OpenRead();
@@ -23,7 +28,7 @@ internal static class HostingExtensions
                 var jsonConfig = JsonConvert.DeserializeObject<JsonConfig>(json);
 
 
-                foreach (var client in jsonConfig.Clients)
+                foreach (var client in jsonConfig.GetClients())
                 {
                     Console.WriteLine($"client {client.ClientId} parsed successfully");
                 }
@@ -48,6 +53,16 @@ internal static class HostingExtensions
             .AddInMemoryClients(finalJsonConfig.GetClients());
 
         return builder;
+    }
+
+    private static DirectoryInfo GetConfigFolder(WebApplicationBuilder builder)
+    {
+        var identityServerConfig = builder.Configuration.GetSection("IdentityServer");
+        var configFolder = identityServerConfig["ConfigFolder"];
+        
+        return string.IsNullOrWhiteSpace(configFolder) 
+            ? new DirectoryInfo("/home/identityserver") 
+            : new DirectoryInfo(configFolder);
     }
 
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)

@@ -1,6 +1,7 @@
 namespace IdentityServer.Config;
 
 using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Test;
 
 public class JsonConfig
 {
@@ -8,6 +9,7 @@ public class JsonConfig
     public List<string> ApiScopes { get; set; } = new();
     public List<JsonApiResource> ApiResources { get; set; } = new();
     public List<JsonClient> Clients { get; set; } = new();
+    public List<JsonUser> Users { get; set; } = new();
 
     public IEnumerable<IdentityResource> GetIdentityResources()
         => IdentityResources.Select(JsonIdentityResource.Export);
@@ -21,6 +23,9 @@ public class JsonConfig
     public IEnumerable<Client> GetClients()
         => Clients.Select(JsonClient.Export);
 
+    public IEnumerable<TestUser> GetUsers()
+        => Users.Select(JsonUser.Export);
+
     public static JsonConfig Merge(JsonConfig jc1, JsonConfig jc2)
         => new()
         {
@@ -30,7 +35,7 @@ public class JsonConfig
             Clients = jc1.Clients.MergeLists(jc2.Clients, areSame: (c1, c2) => c1.ClientId == c2.ClientId).ToList(),
         };
 
-    private static List<JsonApiResource> MergeApiResources(List<JsonApiResource> list1, List<JsonApiResource> list2)
+    private static IEnumerable<JsonApiResource> MergeApiResources(List<JsonApiResource> list1, List<JsonApiResource> list2)
     {
         var result = list1;
 
