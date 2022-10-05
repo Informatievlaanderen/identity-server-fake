@@ -37,4 +37,4 @@ jobs:
       with:
         context: ./src/Be.Vlaanderen.Basisregisters.IdentityServer
         push: true
-        tags: informatievlaanderen/identity-server-fake:latest
+        tags: ghcr.io/informatievlaanderen/identity-server-fake:latest
