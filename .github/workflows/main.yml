@@ -11,6 +11,8 @@ jobs:
     if: github.repository_owner == 'Informatievlaanderen'
     name: Build
     runs-on: ubuntu-latest
+    outputs:
+      sha_short: ${{ steps.sha_short.outputs.sha_short }}
 
     steps:
     - name: Checkout Code
