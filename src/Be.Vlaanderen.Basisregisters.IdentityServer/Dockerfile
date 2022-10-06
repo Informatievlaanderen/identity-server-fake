@@ -15,5 +15,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 COPY example-config /home/identityserver/example-config
-RUN ls /home/identityserver/example-config
+
 ENTRYPOINT ["dotnet", "Be.Vlaanderen.Basisregisters.IdentityServer.dll"]

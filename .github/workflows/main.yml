@@ -9,7 +9,7 @@ concurrency: CI
 jobs:
   build:
     if: github.repository_owner == 'Informatievlaanderen'
-    name: Build
+    name: Build and publish image
     runs-on: ubuntu-latest
     outputs:
       sha_short: ${{ steps.sha_short.outputs.sha_short }}
@@ -54,6 +54,8 @@ jobs:
       identity-server:
         env:
           IdentityServer__ConfigFolder: /home/identityserver/example-config
+        ports:
+          - "5050:80"
         image: ghcr.io/informatievlaanderen/identity-server-fake:${{ needs.build.outputs.sha_short }}
 
     steps:
