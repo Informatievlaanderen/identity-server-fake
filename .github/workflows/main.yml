@@ -37,4 +37,26 @@ jobs:
       with:
         context: ./src/Be.Vlaanderen.Basisregisters.IdentityServer
         push: true
-        tags: ghcr.io/informatievlaanderen/identity-server-fake:latest
+        tags: ghcr.io/informatievlaanderen/identity-server-fake:$(git rev-parse --short "$GITHUB_SHA")
+
+  test:
+    if: github.repository_owner == 'Informatievlaanderen'
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    services:
+      identity-server:
+        image: ghcr.io/informatievlaanderen/identity-server-fake:$(git rev-parse --short "$GITHUB_SHA")
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ secrets.VBR_DOTNET_VERSION }}
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal
