@@ -41,7 +41,7 @@ services:
   identity-server-image:
      image: ghcr.io/informatievlaanderen/identity-server-fake:latest
      environment:
-       - IdentityServer__ConfigFolder=/home/identityserver
+       - IdentityServer__ConfigFolder=/home/identityserver/example-config
      ports:
        - "5050:80"
 ```
