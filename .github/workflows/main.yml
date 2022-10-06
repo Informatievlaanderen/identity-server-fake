@@ -37,7 +37,7 @@ jobs:
       with:
         context: ./src/Be.Vlaanderen.Basisregisters.IdentityServer
         push: true
-        tags: ghcr.io/informatievlaanderen/identity-server-fake:$(git rev-parse --short "$GITHUB_SHA")
+        tags: ghcr.io/informatievlaanderen/identity-server-fake:${{ git rev-parse --short "$GITHUB_SHA" }}
 
   test:
     if: github.repository_owner == 'Informatievlaanderen'
@@ -46,7 +46,7 @@ jobs:
     needs: build
     services:
       identity-server:
-        image: ghcr.io/informatievlaanderen/identity-server-fake:$(git rev-parse --short "$GITHUB_SHA")
+        image: ghcr.io/informatievlaanderen/identity-server-fake:${{ git rev-parse --short "$GITHUB_SHA" }}
 
     steps:
       - uses: actions/checkout@v3
