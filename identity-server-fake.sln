@@ -10,16 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApi", "test\TestApi\Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.Test", "test\IdentityServer.Test\IdentityServer.Test.csproj", "{3C1A0849-4300-4B88-88FB-5CD5A57983B2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{13B08DBF-2931-49B2-85CB-745102082C9D}"
-	ProjectSection(SolutionItems) = preProject
-		config\acm.json = config\acm.json
-		config\or.json = config\or.json
-		config\vr.json = config\vr.json
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{6E0F6E64-C4A7-4F90-8942-0C8010917183}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		README.md = README.md
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{43E14329-52FD-4B5C-9E61-5416BA172F3F}"

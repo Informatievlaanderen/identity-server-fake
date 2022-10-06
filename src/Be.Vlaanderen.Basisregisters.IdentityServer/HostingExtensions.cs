@@ -9,11 +9,6 @@ internal static class HostingExtensions
     public static WebApplicationBuilder ConfigureIdentityServer(this WebApplicationBuilder builder)
     {
         var finalJsonConfig = new JsonConfig();
-        
-        // var identityServerConfig = builder.Configuration.GetSection("IdentityServer");
-        // var configFolder = identityServerConfig["ConfigFolder"];
-        // var di = new DirectoryInfo("/home/identityserver");
-        // //var di = new DirectoryInfo("/home/wodan/gitrepos/digitaalvlaanderen/identity-server-fake/config");
 
         var di = GetConfigFolder(builder);
         foreach (var fi in di.GetFiles("*.json"))
@@ -59,9 +54,9 @@ internal static class HostingExtensions
     {
         var identityServerConfig = builder.Configuration.GetSection("IdentityServer");
         var configFolder = identityServerConfig["ConfigFolder"];
-        
-        return string.IsNullOrWhiteSpace(configFolder) 
-            ? new DirectoryInfo("/home/identityserver") 
+
+        return string.IsNullOrWhiteSpace(configFolder)
+            ? new DirectoryInfo("/home/identityserver")
             : new DirectoryInfo(configFolder);
     }
 

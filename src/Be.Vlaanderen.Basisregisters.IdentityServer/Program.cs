@@ -1,5 +1,4 @@
 ﻿using IdentityServer;
-using Newtonsoft.Json;
 using Serilog;
 
 namespace Be.Vlaanderen.Basisregisters.IdentityServer;
