@@ -8,10 +8,36 @@ internal static class HostingExtensions
 {
     public static WebApplicationBuilder ConfigureIdentityServer(this WebApplicationBuilder builder)
     {
+        var finalJsonConfig = GetJsonConfig(builder);
+
+        builder.Services.AddIdentityServer(
+                options =>
+                {
+                    // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
+                    options.EmitStaticAudienceClaim = true;
+                })
+            .AddInMemoryIdentityResources(finalJsonConfig.GetIdentityResources())
+            .AddInMemoryApiScopes(finalJsonConfig.GetApiScopes())
+            .AddInMemoryApiResources(finalJsonConfig.GetApiResources())
+            .AddInMemoryClients(finalJsonConfig.GetClients());
+
+        return builder;
+    }
+
+    private static JsonConfig GetJsonConfig(WebApplicationBuilder builder)
+    {
         var finalJsonConfig = new JsonConfig();
 
-        var di = GetConfigFolder(builder);
-        foreach (var fi in di.GetFiles("*.json"))
+        var configFolder = GetConfigFolder(builder);
+        var fileInfos = configFolder.GetFiles("*.json");
+
+        if (!fileInfos.Any())
+        {
+            Console.WriteLine("No config files found at {ConfigFolder}", configFolder);
+            return finalJsonConfig;
+        }
+
+        foreach (var fi in fileInfos)
         {
             using var fs = fi.OpenRead();
             using var sr = new StreamReader(fs);
@@ -36,18 +62,7 @@ internal static class HostingExtensions
             }
         }
 
-        builder.Services.AddIdentityServer(
-                options =>
-                {
-                    // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
-                    options.EmitStaticAudienceClaim = true;
-                })
-            .AddInMemoryIdentityResources(finalJsonConfig.GetIdentityResources())
-            .AddInMemoryApiScopes(finalJsonConfig.GetApiScopes())
-            .AddInMemoryApiResources(finalJsonConfig.GetApiResources())
-            .AddInMemoryClients(finalJsonConfig.GetClients());
-
-        return builder;
+        return finalJsonConfig;
     }
 
     private static DirectoryInfo GetConfigFolder(WebApplicationBuilder builder)
