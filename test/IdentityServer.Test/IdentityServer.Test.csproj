@@ -31,6 +31,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="config" />
+    </ItemGroup>
+
+    <ItemGroup>
       <None Remove="config\or.json" />
       <Content Include="config\or.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>

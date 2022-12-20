@@ -29,21 +29,25 @@ internal static class HostingExtensions
         var finalJsonConfig = new JsonConfig();
 
         var configFolder = GetConfigFolder(builder);
-        var fileInfos = Directory.GetFiles(configFolder, "*.json");
+        var fileInfos = configFolder.GetFiles("*.json");
 
         if (!fileInfos.Any())
         {
-            Console.WriteLine($"No config files found at {configFolder}");
+            Console.WriteLine($"No config files found at {configFolder.FullName}");
             return finalJsonConfig;
         }
 
         foreach (var fi in fileInfos)
         {
-            Console.WriteLine($"Processing {fi}");
+            using var fs = fi.OpenRead();
+            using var sr = new StreamReader(fs);
+
+            Console.WriteLine($"Processing {fi.FullName}");
             try
             {
-                var json = File.ReadAllText(fi);
+                var json = sr.ReadToEnd();
                 var jsonConfig = JsonConvert.DeserializeObject<JsonConfig>(json);
+
 
                 foreach (var client in jsonConfig.GetClients())
                 {
@@ -61,12 +65,14 @@ internal static class HostingExtensions
         return finalJsonConfig;
     }
 
-    private static string GetConfigFolder(WebApplicationBuilder builder)
+    private static DirectoryInfo GetConfigFolder(WebApplicationBuilder builder)
     {
         var identityServerConfig = builder.Configuration.GetSection("IdentityServer");
         var configFolder = identityServerConfig["ConfigFolder"];
 
-        return configFolder;
+        return string.IsNullOrWhiteSpace(configFolder)
+            ? new DirectoryInfo("/home/identityserver")
+            : new DirectoryInfo(configFolder);
     }
 
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
