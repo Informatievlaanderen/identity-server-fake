@@ -22,6 +22,12 @@ public class Program
                 .Enrich.FromLogContext()
                 .ReadFrom.Configuration(ctx.Configuration));
 
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetStringAsync(
+                "https://raw.githubusercontent.com/Informatievlaanderen/association-registry/OR-1278-add-contactgegevens/identityserver/acm.json");
+
+            await File.WriteAllTextAsync("/home/identityserver/config/download.json", response);
+
             var app = builder
                 .ConfigureServices()
                 .ConfigurePipeline();
