@@ -33,7 +33,7 @@ internal static class HostingExtensions
 
         if (!fileInfos.Any())
         {
-            Console.WriteLine("No config files found at {ConfigFolder}", configFolder);
+            Console.WriteLine("No config files found at {ConfigFolder}", configFolder.FullName);
             return finalJsonConfig;
         }
 
