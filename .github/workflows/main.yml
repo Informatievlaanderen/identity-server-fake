@@ -43,9 +43,7 @@ jobs:
       with:
         context: ./src/Be.Vlaanderen.Basisregisters.IdentityServer
         push: true
-        tags:
-          - ghcr.io/informatievlaanderen/identity-server-fake:${{ steps.sha_short.outputs.sha_short }}
-          - ghcr.io/informatievlaanderen/identity-server-fake:latest
+        tags: ghcr.io/informatievlaanderen/identity-server-fake:${{ steps.sha_short.outputs.sha_short }}, ghcr.io/informatievlaanderen/identity-server-fake:latest
 
   test:
     if: github.repository_owner == 'Informatievlaanderen'
