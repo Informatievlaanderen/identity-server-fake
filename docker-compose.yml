@@ -2,7 +2,7 @@ version: '3'
 services:
   identity-server-build:
     build: src/Be.Vlaanderen.Basisregisters.IdentityServer/
-    environment:
-      - IdentityServer__ConfigFolder=/home/identityserver/example-config
     ports:
       - "5050:80"
+    volumes:
+      - ./example-config:/home/identityserver

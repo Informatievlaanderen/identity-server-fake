@@ -28,7 +28,7 @@ internal static class HostingExtensions
     {
         var finalJsonConfig = new JsonConfig();
 
-        var configFolder = GetConfigFolder(builder);
+        var configFolder = GetConfigFolder();
         var fileInfos = configFolder.GetFiles("*.json");
 
         if (!fileInfos.Any())
@@ -65,15 +65,7 @@ internal static class HostingExtensions
         return finalJsonConfig;
     }
 
-    private static DirectoryInfo GetConfigFolder(WebApplicationBuilder builder)
-    {
-        var identityServerConfig = builder.Configuration.GetSection("IdentityServer");
-        var configFolder = identityServerConfig["ConfigFolder"];
-
-        return string.IsNullOrWhiteSpace(configFolder)
-            ? new DirectoryInfo("/home/identityserver")
-            : new DirectoryInfo(configFolder);
-    }
+    private static DirectoryInfo GetConfigFolder() => new DirectoryInfo("/home/identityserver");
 
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
