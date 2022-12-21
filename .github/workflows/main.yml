@@ -52,8 +52,8 @@ jobs:
     needs: build
     services:
       identity-server:
-        env:
-          IdentityServer__ConfigFolder: /home/identityserver/example-config
+        volumes:
+          - ./example-config:/home/identityserver
         ports:
           - "5050:80"
         image: ghcr.io/informatievlaanderen/identity-server-fake:${{ needs.build.outputs.sha_short }}

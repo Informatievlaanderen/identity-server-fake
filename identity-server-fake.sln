@@ -24,6 +24,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\main.yml = .github\workflows\main.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example-config", "example-config", "{4D4B444B-0999-4982-9F08-CD7DFF64E32B}"
+	ProjectSection(SolutionItems) = preProject
+		example-config\acm.json = example-config\acm.json
+		example-config\or.json = example-config\or.json
+		example-config\vr.json = example-config\vr.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +42,7 @@ Global
 		{3C1A0849-4300-4B88-88FB-5CD5A57983B2} = {3620455E-CBE5-4FD4-BE4C-0E93771A4845}
 		{43E14329-52FD-4B5C-9E61-5416BA172F3F} = {6E0F6E64-C4A7-4F90-8942-0C8010917183}
 		{3EB0F039-4136-4CFC-978B-BAEEA52797C8} = {43E14329-52FD-4B5C-9E61-5416BA172F3F}
+		{4D4B444B-0999-4982-9F08-CD7DFF64E32B} = {6E0F6E64-C4A7-4F90-8942-0C8010917183}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3BAC457A-D185-42FF-BB0E-994D865FA265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
