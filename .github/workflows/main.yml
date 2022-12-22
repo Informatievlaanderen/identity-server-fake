@@ -67,3 +67,8 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+      - name: Shows logs identity server fake container
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          docker logs acm
