@@ -60,6 +60,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Run identity server fake container
+        shell: bash
+        run: |
+          docker run -d --name acm -p 5051:80 -v ${{ github.workspace }}/identityserver:/home/identityserver ghcr.io/informatievlaanderen/identity-server-fake:${{ needs.build.outputs.sha_short }}
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v2
         with:
