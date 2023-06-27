@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using TestApi;
 using Xunit;
 
-public class UnitTest1
+public class TokenRequestedTests
 {
     private const string CorrectScope = "dv_organisatieregister_testclient";
     private const string CorrectSecret = "secret";

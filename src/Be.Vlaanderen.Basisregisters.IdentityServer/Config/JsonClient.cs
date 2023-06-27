@@ -1,9 +1,7 @@
-﻿namespace IdentityServer.Config;
+namespace IdentityServer.Config;
 
-using System.Security.Claims;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Test;
 
 public class JsonClient
 {
@@ -68,31 +66,4 @@ public class JsonClient
             "code" => GrantTypes.Code,
             _ => throw new NotSupportedException(),
         };
-}
-
-public class JsonUser
-{
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public bool IsActive { get; set; }
-    public List<JsonClaim> Claims { get; set; }
-    public string SubjectId { get; set; }
-
-    public static TestUser Export(JsonUser jsonUser)
-    {
-        return new TestUser
-        {
-            Username = jsonUser.Username,
-            Password = jsonUser.Password,
-            IsActive = jsonUser.IsActive,
-            SubjectId = jsonUser.SubjectId,
-            Claims = jsonUser.Claims.Select(c => new Claim(c.Type, c.Value)).ToList()
-        };
-    }
-}
-
-public class JsonClaim
-{
-    public string Type { get; set; }
-    public string Value { get; set; }
 }

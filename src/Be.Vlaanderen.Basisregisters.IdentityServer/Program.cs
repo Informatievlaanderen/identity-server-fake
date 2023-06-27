@@ -1,4 +1,4 @@
-﻿using IdentityServer;
+using IdentityServer;
 using Serilog;
 
 namespace Be.Vlaanderen.Basisregisters.IdentityServer;
@@ -26,7 +26,7 @@ public class Program
                 .ConfigureServices()
                 .ConfigurePipeline();
 
-            app.Run();
+            await app.RunAsync();
         }
         catch (Exception ex)
         {
