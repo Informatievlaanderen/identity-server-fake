@@ -6,7 +6,6 @@
     <Nullable>disable</Nullable>
     <AssemblyName>Be.Vlaanderen.Basisregisters.IdentityServer</AssemblyName>
     <RootNamespace>Be.Vlaanderen.Basisregisters.IdentityServer</RootNamespace>
-    <UserSecretsId>23de24fb-6581-4272-8390-acba0250717b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
