@@ -33,6 +33,7 @@ public class JsonConfig
             ApiScopes = jc1.ApiScopes.MergeLists(jc2.ApiScopes, areSame: (s1, s2) => s1 == s2),
             ApiResources = MergeApiResources(jc1.ApiResources, jc2.ApiResources).ToList(),
             Clients = jc1.Clients.MergeLists(jc2.Clients, areSame: (c1, c2) => c1.ClientId == c2.ClientId).ToList(),
+            Users = jc1.Users.MergeLists(jc2.Users, areSame: (u1, u2) => u1.Username.Equals(u2.Username, StringComparison.InvariantCultureIgnoreCase)).ToList(),
         };
 
     private static IEnumerable<JsonApiResource> MergeApiResources(List<JsonApiResource> list1, List<JsonApiResource> list2)

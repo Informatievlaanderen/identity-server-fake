@@ -19,7 +19,8 @@ internal static class HostingExtensions
             .AddInMemoryIdentityResources(finalJsonConfig.GetIdentityResources())
             .AddInMemoryApiScopes(finalJsonConfig.GetApiScopes())
             .AddInMemoryApiResources(finalJsonConfig.GetApiResources())
-            .AddInMemoryClients(finalJsonConfig.GetClients());
+            .AddInMemoryClients(finalJsonConfig.GetClients())
+            .AddInMemoryUsers(finalJsonConfig.GetUsers());
 
         return builder;
     }
